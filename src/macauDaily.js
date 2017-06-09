@@ -4,7 +4,7 @@ $(function () {
 
   fetchNews(function (news) {
     var newsListEl = $('.news-list')
-    newsListEl.append('<h1>澳门日报</h1>')
+    newsListEl.append('<li><h1>澳门日报</h1></li>')
 
     setTimeout(function () {
       for (var i = 0; i < news.length; i++) {
