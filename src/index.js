@@ -1,6 +1,7 @@
 function getDemoList() {
     var demos = [
         { name: '澳门日报 - 今日新闻列表', url: 'macau-daily.html' },
+        { name: '微信授权', url: 'wechat-oauth2.html' }
     ]
 
     var demoListHtml = ''

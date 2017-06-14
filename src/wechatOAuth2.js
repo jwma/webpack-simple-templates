@@ -2,7 +2,6 @@ import $ from 'jquery'
 
 $(function () {
     $('#checkAuthBtn').on('click', function () {
-        console.log('in')
         var fromUrl = window.location.href
         $.ajax({
             url: '/wechat-oa2/activity/app.php/api/check',
@@ -13,7 +12,7 @@ $(function () {
                 fromUrl: fromUrl,
                 eventKey: 'demo',
                 eventId: 1,
-                dev: 1
+                dev: 1 //  开发时加入dev，接口会使用默认的测试账户，并当作已授权
             },
             success: function (response) {
                 console.log(response)
