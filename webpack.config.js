@@ -4,7 +4,8 @@ const webpack = require('webpack')
 module.exports = {
     entry: {
         index: './src/index.js',
-        macauDaily: './src/macauDaily.js'
+        macauDaily: './src/macauDaily.js',
+        wechatOAuth2: './src/wechatOAuth2.js'
     },
     output: {
         filename: '[name].bundle.js',
@@ -20,8 +21,14 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'dist'),
         proxy: {
             '/macau-daily-api': {
+                changeOrigin: true,
                 target: 'http://h5.newaircloud.com',
                 pathRewrite: { '^/macau-daily-api': '' }
+            },
+            '/wechat-oa2': {
+                target: 'http://e1.zhyxzc.com',
+                changeOrigin: true,
+                pathRewrite: { '^/wechat-oa2': '' }
             }
         }
     }
