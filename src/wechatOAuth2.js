@@ -4,7 +4,7 @@ $(function () {
     $('#checkAuthBtn').on('click', function () {
         var fromUrl = window.location.href
         $.ajax({
-            url: '/wechat-oa2/activity/app.php/api/check',
+            url: '/wechat-oa2/activity/app.php/oauth2/check',
             type: 'POST',
             dataType: 'json',
             data: {
