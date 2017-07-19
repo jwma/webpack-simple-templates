@@ -13,7 +13,8 @@ module.exports = {
         publicPath: '/asset/'
     },
     externals: {
-        jquery: 'jQuery'
+        jquery: 'jQuery',
+        Vue: 'Vue'
     },
     devServer: {
         port: 8080,
@@ -31,5 +32,21 @@ module.exports = {
                 pathRewrite: { '^/wechat-oa2': '' }
             }
         }
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            ENV: JSON.stringify(process.env.NODE_ENV)
+        })
+    ]
+}
+
+if (process.env.NODE_ENV === 'prod') {
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    })
+  ])
 }

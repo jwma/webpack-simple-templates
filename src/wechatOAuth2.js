@@ -1,9 +1,20 @@
 import $ from 'jquery'
 
+function wrapRequest(options) {
+    if (ENV === 'dev') {
+        var requestData = options.data || {}
+        requestData.dev = 1 // 开发时加入dev，接口会使用默认的测试账户，并当作已授权
+        options.data = requestData
+    }
+
+    $.ajax(options)
+}
+
 $(function () {
     $('#checkAuthBtn').on('click', function () {
         var fromUrl = window.location.href
-        $.ajax({
+
+        wrapRequest({
             url: '/wechat-oa2/activity/oauth2/check',
             type: 'POST',
             dataType: 'json',
@@ -11,8 +22,7 @@ $(function () {
                 forward: 'AppBundle:Demo:savePlayer',
                 fromUrl: fromUrl,
                 eventKey: 'demo',
-                eventId: 1,
-                dev: 1 //  开发时加入dev，接口会使用默认的测试账户，并当作已授权
+                eventId: 1
             },
             success: function (response) {
                 console.log(response)
@@ -27,13 +37,10 @@ $(function () {
     })
 
     $('#getUserInfoBtn').on('click', function () {
-        $.ajax({
+        wrapRequest({
             url: '/wechat-oa2/activity/demo/get-user-info',
             method: 'GET',
             dataType: 'json',
-            data: {
-                dev: 1
-            },
             success: function (response) {
                 if (response.code == 200) {
                     alert(response.userInfo.nickname)
